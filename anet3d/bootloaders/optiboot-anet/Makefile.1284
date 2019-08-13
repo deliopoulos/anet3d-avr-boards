@@ -1,0 +1,60 @@
+#
+# Makefile for 40-pin AVR chips, including ATmega1284
+#
+# * Copyright 2013-2015 by Bill Westfield.  Part of Optiboot.
+# * This software is licensed under version 2 of the Gnu Public Licence.
+# * See optiboot.c for details.
+
+# Chip level targets
+#
+HELPTEXT += "target atmega1284    - ATmega1284p (40 pin, 128k)\n"
+atmega1284: TARGET = atmega1284p
+atmega1284: MCU_TARGET = atmega1284p
+atmega1284: CFLAGS += $(COMMON_OPTIONS) -DBIGBOOT
+atmega1284: AVR_FREQ ?= 16000000L
+atmega1284: LDSECTIONS  = -Wl,--section-start=.text=0x1fc00 -Wl,--section-start=.version=0x1fffe
+atmega1284: CFLAGS += $(UART_CMD)
+atmega1284: $(PROGRAM)_atmega1284p.hex
+ifndef PRODUCTION
+atmega1284: $(PROGRAM)_atmega1284p.lst
+endif
+
+atmega1284p: atmega1284
+
+atmega1284_isp: atmega1284
+atmega1284_isp: TARGET = atmega1284p
+atmega1284_isp: MCU_TARGET = atmega1284p
+# 1024 byte boot
+atmega1284_isp: HFUSE ?= DE
+# Full Swing xtal (16MHz) 16KCK/14CK+65ms
+atmega1284_isp: LFUSE ?= F7
+# 2.7V brownout
+atmega1284_isp: EFUSE ?= FD
+atmega1284_isp: isp
+
+#
+# Board-level targets
+#
+
+HELPTEXT += "target anet    - Anet board\n"
+anet: TARGET = $@
+anet: CHIP = atmega1284p
+anet: AVR_FREQ ?= 16000000L
+anet: BAUD_RATE ?= 57600
+anet:
+	"$(MAKE)" $(CHIP) LED=A4 UART=0
+	mv $(PROGRAM)_$(CHIP).hex $(PROGRAM)_$(TARGET).hex
+ifndef PRODUCTION
+	mv $(PROGRAM)_$(CHIP).lst $(PROGRAM)_$(TARGET).lst
+endif
+
+anet_isp: anet
+anet_isp: TARGET = anet
+anet_isp: MCU_TARGET = atmega1284p
+# 1024 byte boot
+anet_isp: HFUSE ?= DE
+# Full swing xtal (16MHz) 16KCK/14CK+65ms
+anet_isp: LFUSE ?= F7
+# 2.7V brownout
+anet_isp: EFUSE ?= FD
+anet_isp: isp

@@ -1,0 +1,7 @@
+#!/bin/bash
+make clean
+#
+
+# don't build most of the targets already in makeall
+
+make anet AVR_FREQ=16000000L BAUD_RATE=57600 LED=A4 UART=0
