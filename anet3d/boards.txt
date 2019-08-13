@@ -1,0 +1,36 @@
+# Anet3D Board Contribution Configuration
+#
+# See: http://code.google.com/p/arduino/wiki/Platforms
+
+name=[Optiboot]
+version=6.2
+
+##############################################################
+
+menu.cpu=Processor
+
+##############################################################
+##  Anet Board
+##############################################################
+
+anet.name=Anet V1.0 (Optiboot)
+
+anet.upload.tool=arduino:avrdude
+anet.upload.protocol=arduino
+anet.upload.maximum_size=130048
+anet.upload.maximum_data_size=16384
+anet.upload.speed=57600
+
+anet.bootloader.tool=arduino:avrdude
+anet.bootloader.low_fuses=0xF7
+anet.bootloader.high_fuses=0xDE
+anet.bootloader.extended_fuses=0xFD
+anet.bootloader.file=optiboot-anet/optiboot_anet.hex
+anet.bootloader.unlock_bits=0x3F
+anet.bootloader.lock_bits=0x2F
+
+anet.build.mcu=atmega1284p
+anet.build.f_cpu=16000000L
+anet.build.board=AVR_ANET
+anet.build.core=arduino:arduino
+anet.build.variant=anet
