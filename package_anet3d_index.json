@@ -1,0 +1,36 @@
+{
+  "packages": [
+    {
+      "name": "anet3d",
+      "maintainer": "deliopoulos",
+      "websiteURL": "https://github.com/deliopoulos/anet3d-avr-boards",
+      "email": "",
+      "help": {
+        "online": "https://github.com/deliopoulos/anet3d-avr-boards/wiki"
+      },
+      "platforms": [
+        {
+          "name": "Anet3D AVR Boards",
+          "architecture": "avr",
+          "version": "1.0.0",
+          "category": "Contributed",
+          "url": "https://github.com/deliopoulos/anet3d-avr-boards/releases/download/v1.0.0/anet3d-1.0.0.tar.bz2",
+          "archiveFileName": "anet3d-1.0.0.tar.bz2",
+          "checksum": "SHA-256:eb9f1b1636857caa9d6c3f09b2b95c226c819283bdcee9a4e68c9d5ee8101732",
+          "size": "4863",
+          "boards": [
+            {"name": "Anet V1.0 (Optiboot)"}
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "avrdude",
+              "version": "6.0.1-arduino5"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
